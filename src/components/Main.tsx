@@ -23,51 +23,64 @@ const Main: React.FC<ShoeCart> = ({count,setCount}) => {
     if(count === 0) setCount(0) 
    
   };
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [, setIsVisible] = useState<boolean>(false);
+  
+  const [slider,SetSlider] = useState<number>(1)
   
   const addToCart = () => {
     setIsVisible(true);
   };
+  
+  function increment () {
+    SetSlider(slider +1) 
+    if(slider === 4 ) SetSlider(4)
+  }
+  function decrement () {
+    SetSlider(slider -1) 
+    if(slider === 1 ) SetSlider(1)
+  }
+
 
   return (
     <>
-      <main className="flex flex-col items-center justify-center md:flex-row md:gap-[125px] md:mt-[50px]">
+      <main className="flex flex-col items-center justify-center xl:flex-row xl:gap-[125px] xl:mt-[50px]">
         <section className="shoe-cart">
           <div className="relative">
+
             <img
               className="w-full md:w-[445px] md:rounded-2xl"
-              src="/assets/image-product-1.jpg"
+              src={`/assets/shoe-${slider}.jpg`}
               alt=""
             />
-            <div className="w-[40px] h-[40px] bg-white rounded-[50%] flex items-center justify-center absolute top-1/2 right-4">
+            <div onClick={increment} className="w-[40px] cursor-pointer h-[40px] bg-white rounded-[50%] flex items-center justify-center absolute top-1/2 right-4">
               <img src="/assets/icon-next.svg" alt="" />
             </div>
-            <div className="w-[40px] h-[40px] bg-white rounded-[50%] flex items-center justify-center absolute top-1/2 left-4">
-              <img
+            <div className="w-[40px] h-[40px] bg-white rounded-[50%] flex items-center cursor-pointer justify-center absolute top-1/2 left-4">
+              <img onClick={decrement}
                 src="https://ecommerce-product-page-lazzzare.vercel.app/assets/icon-previous-7543ce3f.svg"
                 alt=""
               />
             </div>
           </div>
           <div className="hidden flex-row gap-7 mt-5 md:flex">
-            <img
+            <img onClick={()=>SetSlider(1)}
               className="w-[88px] h-[88px] rounded-xl hover:bg-[#FFFFFF] hover:opacity-50 cursor-pointer"
-              src="/assets/image-product-1-thumbnail.jpg"
+              src="/assets/shoe-1-thumb.jpg"
               alt=""
             />
-            <img
+            <img onClick={()=>SetSlider(2)}
               className="w-[88px] h-[88px] rounded-xl  hover:bg-[#FFFFFF] hover:opacity-50 cursor-pointer"
-              src="/assets/image-product-2-thumbnail.jpg"
+              src="/assets/shoe-2-thumb.jpg"
               alt=""
             />
-            <img
+            <img onClick={()=>SetSlider(3)}
               className="w-[88px] h-[88px] rounded-xl  hover:bg-[#FFFFFF] hover:opacity-50 cursor-pointer"
-              src="/assets/image-product-3-thumbnail.jpg"
+              src="/assets/shoe-3-thumb.jpg"
               alt=""
             />
-            <img
+            <img onClick={()=>SetSlider(4)}
               className="w-[88px] h-[88px] rounded-xl hover:bg-[#FFFFFF] hover:opacity-50 cursor-pointer"
-              src="/assets/image-product-3-thumbnail.jpg"
+              src="/assets/shoe-4-thumb.jpg"
               alt=""
             />
           </div>

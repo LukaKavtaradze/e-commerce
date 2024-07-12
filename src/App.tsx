@@ -13,7 +13,7 @@ const App = () => {
   const Checkout: Shoes[] = [
     {
       name: "Fall Limited Edition Sneakers",
-      image: "/assets/image-product-1-thumbnail.jpg",
+      image: "/assets/shoe-1-thumb.jpg",
       price: 125,
     },
   ];
@@ -31,14 +31,14 @@ const App = () => {
     setCartOpen(status);
   };
 
-;
+  const [purchased, SetIsPurchased] = useState<boolean>(false);
 
   const resetCount = () => {
-    setCount(0)
-  }
+    setCount(0);
+  };
 
   return (
-    <div className="w-full h-screen bg-[#fff] flex justify-start items-center flex-col border-box font-[Kumbh Sans] relative">
+    <div className="w-full  h-screen bg-[#fff] flex justify-start items-center flex-col border-box font-[Kumbh Sans] relative">
       <div className="flex flex-col w-full justify-start items-center relative">
         <Header openCart={toggleCart} isOpenn={toggleMenu} />
         <div
@@ -117,7 +117,14 @@ const App = () => {
                       alt="Delete"
                     />
                   </div>
-                  <button className="w-[312px] h-[56px] bg-[#ff7e1b] rounded-xl mt-[26px] text-white">
+                  <button
+                    onClick={() => {
+                      resetCount();
+                      SetIsPurchased(!purchased);
+                      setCartOpen(!cartOpen)
+                    }}
+                    className="w-[312px] h-[56px] bg-[#ff7e1b] rounded-xl mt-[26px] text-white"
+                  >
                     Checkout
                   </button>
                 </div>
@@ -125,6 +132,17 @@ const App = () => {
           </div>
         </div>
         <Main count={count} setCount={setCount} />
+
+        <div className={`w-full h-screen ${purchased ? "flex" : "hidden"} flex-col items-center justify-center absolute bg-[#00000066] ` } >
+          <img
+            className="w-[500px] h-[200px] "
+            src="/assets/giphy.webp"
+            alt=""
+          />
+          <button onClick={() => SetIsPurchased(!purchased)} className="w-[100px] rounded-[10px] h-[50px] bg-[#ff7e1b]">
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );
